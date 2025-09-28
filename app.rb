@@ -6,7 +6,7 @@ class ReadLog
 		@path = path
 	end
 
-	def log
+	def ip_log
 		read
 	end
 
@@ -15,6 +15,18 @@ class ReadLog
 	end
 end
 
-# lines.each do |line|
-# 	ip << i.scan(/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/)
-# end
+class SearchIP
+	def initialize(ip_log)
+		@ip_log = ip_log
+	end
+
+	def ip_all
+		search
+	end
+
+	def search
+		ip = Array.new
+		@ip_log.each{|value| ip << value.scan(/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/)}
+		ip
+	end
+end
