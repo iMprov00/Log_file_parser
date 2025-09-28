@@ -22,9 +22,15 @@ class SearchIP
 	end
 
 	def search
-		ip = Array.new
-		@ip_log.each{|value| ip << value.scan(/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/)}
-		ip
+	  ip = Array.new
+	  @ip_log.each do |value|
+	    unless value.empty?
+	      found_ips = value.scan(/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/)
+	      # Добавляем только если нашли IP
+	      ip << found_ips.first unless found_ips.empty?
+	    end
+	  end
+	  ip
 	end
 end
 
