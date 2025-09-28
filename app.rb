@@ -1,6 +1,3 @@
-
-ip = Array.new
-
 class ReadLog
 	def initialize(path)
 		@path = path
@@ -29,4 +26,21 @@ class SearchIP
 		@ip_log.each{|value| ip << value.scan(/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/)}
 		ip
 	end
+end
+
+class HowManyIP
+	def how_ip(all_ip)
+		all_ip.tally
+	end
+end
+
+
+read_log = ReadLog.new('access.log')
+search_ip = SearchIP.new(read_log.ip_log)
+how_ip = HowManyIP.new
+
+ip = how_ip.how_ip(search_ip.ip_all)
+
+ip.each do |key, value|
+	puts "IP: #{key}, количество: #{value}"
 end
